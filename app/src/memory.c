@@ -8,7 +8,7 @@
 
 // Function Prototypes
 
-void AllocCheck(void *);
+void AllocCheck(const void *);
 void **Malloc2d(size_t, size_t, long, long);
 void **Free2d(void **, size_t);
 
@@ -16,7 +16,7 @@ void **Free2d(void **, size_t);
 
 /// @brief メモリ確保が成功したかの確認
 /// @param p このアドレスがNULLなら強制終了
-void AllocCheck(void *p)
+void AllocCheck(const void *p)
 {
     if (p == NULL)
     {

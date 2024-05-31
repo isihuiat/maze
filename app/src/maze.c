@@ -24,7 +24,7 @@ void ShowMap(Map_t *);
 void CreateMap(Map_t *);
 void SetObjectInMap(Map_t *, const char);
 void GameStart(Map_t *, Flag_t *);
-void GetPos(Map_t *, size_t *, size_t *);
+void GetPos(const Map_t *, size_t *, size_t *);
 void Move(Map_t *, Flag_t *, char);
 void ReadyGame(Map_t *);
 void InitMaze(Maze_t *);
@@ -149,7 +149,7 @@ void GameStart(Map_t *map, Flag_t *flags)
         }
         else if (key[0] == 0x00 && (c == 0x48 || c == 0x50 || c == 0x4b || c == 0x4d))
         {
-            key[2] = c;
+            key[1] = c;
         }
         else
         {
@@ -157,9 +157,9 @@ void GameStart(Map_t *map, Flag_t *flags)
             key[1] = DEFAULT_VAR;
         }
         // アクション
-        if (key[sizeof(key) / sizeof(key[0])] != DEFAULT_VAR)
+        if (key[(sizeof(key) / sizeof(key[0]) - 1)] != DEFAULT_VAR)
         {
-            Move(map, flags, key[sizeof(key) / sizeof(key[0])]);
+            Move(map, flags, key[(sizeof(key) / sizeof(key[0]) - 1)]);
             if (flags->r0.bits.b0)
             {
                 return;
@@ -225,7 +225,7 @@ void Move(Map_t *map, Flag_t *flags, char key)
     return;
 }
 
-void GetPos(Map_t *map, size_t *row, size_t *col)
+void GetPos(const Map_t *map, size_t *row, size_t *col)
 {
     for (size_t i = 0; i < map->row_length; i++)
     {
