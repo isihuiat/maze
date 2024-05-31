@@ -20,7 +20,7 @@ void AllocCheck(const void *p)
 {
     if (p == NULL)
     {
-        fprintf(stderr, "Memory allocation faild\n");
+        fprintf(stderr, "Memory allocation failed\n");
         abort();
     }
     return;
